@@ -16,20 +16,21 @@ startGame.addEventListener('click', () => {
 
 // RANDOM SPLIT PHRASE GENERATOR 
 function getRandomPhraseAsArray(arr) {
-     const  randomPhrase = phrases[Math.floor(Math.random() * phrases.length)];
+     const  randomPhrase = arr[Math.floor(Math.random() * arr.length)];
      let randomCharacters = randomPhrase.split('');
      return randomCharacters;
 }
 
+const splitPhrase = getRandomPhraseAsArray(phrases)
 
 
-
-// // ADD RANDOM PHRASE TO DISPLAY
-// function addPhraseToDisplay(randomPhrase) {
-//         for (let i = 0; i < randomPhrase.length; i++) {
-//        randomPhrase.join()
-
-//         }
+// ADD RANDOM PHRASE TO DISPLAY
+function addPhraseToDisplay(arr) {
+        for (let i = 0; i < splitPhrase.length; i++) {
+       const li = document.createElement('li')
+       li.
+       return console.log(li)
+        }}
 
 
 
