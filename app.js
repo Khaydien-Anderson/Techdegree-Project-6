@@ -6,14 +6,6 @@ const ul = document.getElementById('phrase').firstElementChild;
 const phrases = ['operate','super','dictator', 'god', 'crumpet'];
 
 
-
-
-//START GAME BUTTON
-startGame.addEventListener('click', () => {
-    const overlay = document.querySelector('#overlay')
-    overlay.style.display = 'none';
-});
-
 // RANDOM SPLIT PHRASE GENERATOR 
 const getRandomPhraseAsArray = arr => {
      const  randomPhrase = arr[Math.floor(Math.random() * arr.length)];
@@ -70,23 +62,33 @@ for (let i = 0; i < letters.length; i++ ) {
 
 }};
 
+
+//check if the game has been won or lost
 const checkWin = () => {
 
 
 }
 
-qwerty.addEventListener('click', e => {
+//START GAME BUTTON
+startGame.addEventListener('click', () => {
+    const overlay = document.querySelector('#overlay')
+    overlay.style.display = 'none';
+});
+
+//listen for the onscreen keyboard to be clicked
+
+qwerty.addEventListener('click', click => {
+    const buttons = document.querySelectorAll('#qwerty button');
+    for (let i = 0; i < buttons.length; i++) {
+
+        if (click.target === buttons[i]) {
+            
+            buttons[i].className = 'chosen';
+        }
+
+
+    }
   
 
+    
 });
-   
-
-
-
-
-
-
-
-//check if the game has been won or lost
-//listen for the start game button to be pressed
-//listen for the onscreen keyboard to be clicked
