@@ -1,5 +1,5 @@
 const qwerty = document.querySelector('#qwerty');
-const phrase = document.querySelector('#phrase');
+const phrase = document.getElementById('phrase');
 let missed = 0;
 const startGame = document.querySelector('.btn__reset');
 const ul = document.getElementById('phrase').firstElementChild;
@@ -15,7 +15,7 @@ startGame.addEventListener('click', () => {
 });
 
 // RANDOM SPLIT PHRASE GENERATOR 
-function getRandomPhraseAsArray(arr) {
+const getRandomPhraseAsArray = arr => {
      const  randomPhrase = arr[Math.floor(Math.random() * arr.length)];
      let randomCharacters = randomPhrase.split('');
      return randomCharacters;
@@ -23,24 +23,56 @@ function getRandomPhraseAsArray(arr) {
 
 const splitPhrase = getRandomPhraseAsArray(phrases)
 
-splitPhrase
+
+//^^ phrase now split up into variable///
+
 
 
 // ADD RANDOM PHRASE TO DISPLAY
-function addPhraseToDisplay(arr) {
+const addPhraseToDisplay = arr => {
         for (let i = 0; i < arr.length; i++) {
-       const li = document.createElement('li');
+            const li = document.createElement('li');
 
-       const letter = arr[i];
-       li.textContent = letter;
-       li.className = 'letter'
-       ul.appendChild(li);
-
+            const letter = arr[i];
+            li.textContent = letter;
+            li.className = 'letter'
+            ul.appendChild(li);
         }};
 
+
+//adds phrase to display //        
 addPhraseToDisplay(splitPhrase)
+//
+
 
 //check if a letter is in phrase
+
+const checkLetter = button => {
+    const letters =  document.querySelectorAll('[class="letter"]')// newly created classes from line 34
+    const buttons = document.querySelectorAll('[class="keyrow"] button')
+for (let i = 0; i < letters.length; i++ ) {
+    const correctAnswer = letters[i].textContent
+    console.log(correctAnswer)
+
+}
+
+for (let x = 0; x < buttons.length; x++) {
+const qwerty2 = buttons[x].textContent
+console.log(qwerty2)
+} 
+
+
+
+};
+
+   
+
+
+
+
+
+
+
 //check if the game has been won or lost
 //listen for the start game button to be pressed
 //listen for the onscreen keyboard to be clicked
