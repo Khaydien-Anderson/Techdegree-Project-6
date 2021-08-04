@@ -50,21 +50,35 @@ addPhraseToDisplay(splitPhrase)
 const checkLetter = button => {
     const letters =  document.querySelectorAll('[class="letter"]')// newly created classes from line 34
     const buttons = document.querySelectorAll('[class="keyrow"] button')
+    
 for (let i = 0; i < letters.length; i++ ) {
     const correctAnswer = letters[i].textContent
-    console.log(correctAnswer)
+    console.log(correctAnswer) // logs all correct LETTERS that are hidden
+    
+   
+        if (button === correctAnswer) {
+
+            for (let x = 0; x < button.length; x++) {
+                const li = ul.querySelectorAll('li');
+                li[x].className = "show" // shows all correct guesses
+                
+            }
+
+        }
+    
+
+
+}};
+
+const checkWin = () => {
+
 
 }
 
-for (let x = 0; x < buttons.length; x++) {
-const qwerty2 = buttons[x].textContent
-console.log(qwerty2)
-} 
+qwerty.addEventListener('click', e => {
+  
 
-
-
-};
-
+});
    
 
 
