@@ -43,7 +43,7 @@ const checkLetter = button => {
     const letters =  document.querySelectorAll('[class="letter"]')// newly created classes from line 34
     const buttons = document.querySelectorAll('[class="keyrow"] button')
     
-for (let i = 0; i < letters.length; i++ ) {
+for (let i = 0; i < letters.length; i++ ) { // loops through li items
     const correctAnswer = letters[i].textContent
     console.log(correctAnswer) // logs all correct LETTERS that are hidden
     
@@ -66,12 +66,11 @@ for (let i = 0; i < letters.length; i++ ) {
 //check if the game has been won or lost
 const checkWin = () => {
 
-
 }
 
 //START GAME BUTTON
 startGame.addEventListener('click', () => {
-    const overlay = document.querySelector('#overlay')
+    const overlay = document.querySelector('#overlay');
     overlay.style.display = 'none';
 });
 
@@ -79,16 +78,10 @@ startGame.addEventListener('click', () => {
 
 qwerty.addEventListener('click', click => {
     const buttons = document.querySelectorAll('#qwerty button');
+
     for (let i = 0; i < buttons.length; i++) {
-
         if (click.target === buttons[i]) {
-            
-            buttons[i].className = 'chosen';
+            buttons[i].className = 'chosen';        
         }
-
-
-    }
-  
-
-    
+    }    
 });
