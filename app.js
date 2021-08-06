@@ -39,22 +39,21 @@ addPhraseToDisplay(splitPhrase)
 
 //check if a letter is in phrase
 
-const checkLetter = button => {
-    const letters =  document.querySelectorAll('[class="letter"]')// newly created classes from line 34
-    const buttons = document.querySelectorAll('[class="keyrow"] button')
-    
+const checkLetter = buttonClicked => {
+    const letters =  document.querySelectorAll('.letter')// newly created classes from line 34
+    let match = null;
 for (let i = 0; i < letters.length; i++ ) { // loops through li items
-    const correctAnswer = letters[i].textContent
-    console.log(correctAnswer) // logs all correct LETTERS that are hidden
+    
+    
+    console.log(letters[i].textContent); // logs all correct LETTERS that are hidden
     
    
-        if (button === correctAnswer) {
-
-            for (let x = 0; x < button.length; x++) {
-                const li = ul.querySelectorAll('li');
-                li[x].className = "show" // shows all correct guesses
-                
-            }
+        if (buttonClicked === letters[i].textContent.toLowerCase()) {
+                const li = ul.querySelectorAll('li')[i];
+                li.classList.add("show"); // shows all correct guesses
+                match = true;
+                console.log(match)
+          
 
         }
     
@@ -66,7 +65,7 @@ for (let i = 0; i < letters.length; i++ ) { // loops through li items
 //check if the game has been won or lost
 const checkWin = () => {
 
-}
+};
 
 //START GAME BUTTON
 startGame.addEventListener('click', () => {
@@ -76,12 +75,17 @@ startGame.addEventListener('click', () => {
 
 //listen for the onscreen keyboard to be clicked
 
-qwerty.addEventListener('click', click => {
+qwerty.addEventListener('click', buttonClicked => {
+    const letters =  document.querySelectorAll('[class="letter"]');
     const buttons = document.querySelectorAll('#qwerty button');
-
+let button = checkLetter(buttonClicked.target.textContent); //letter user has clicked
     for (let i = 0; i < buttons.length; i++) {
-        if (click.target === buttons[i]) {
+        if (buttonClicked.target === buttons[i]) {
             buttons[i].className = 'chosen';        
+        } if (button === letters) {
+            letters.style.color = 'red';
+            
         }
+        
     }    
 });
