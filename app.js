@@ -33,7 +33,7 @@ const addPhraseToDisplay = arr => {
 
 
 //adds phrase to display //        
-addPhraseToDisplay(splitPhrase)
+
 //
 
 
@@ -52,40 +52,76 @@ for (let i = 0; i < letters.length; i++ ) { // loops through li items
                 const li = ul.querySelectorAll('li')[i];
                 li.classList.add("show"); // shows all correct guesses
                 match = true;
-                console.log(match)
-          
-
-        }
+        
+        } 
     
 
+}
+return match;
 
-}};
+};
 
 
 //check if the game has been won or lost
 const checkWin = () => {
+    let hiddenLI = document.querySelectorAll('.letter')
+    let shownLI = document.querySelectorAll('.show')
 
+    console.log(hiddenLI.length, 'hidden')
+    console.log(shownLI.length, 'shown')
+
+    if (hiddenLI.length === shownLI.length) {
+        const overlay = document.querySelector('#overlay');
+        
+        overlay.style.display = 'flex';
+        overlay.className = 'win'
+        overlay.firstElementChild.innerHTML =`<h2>you win</h2> `
+        startGame.innerHTML = '<a>Reset Game</a>'
+    }
+     if (missed > 4) {
+        overlay.style.display = 'flex';
+        overlay.className = 'lose'
+        overlay.firstElementChild.innerHTML =`<h2>you lose</h2> `
+        startGame.innerHTML = '<a>Reset Game</a>'
+    }
 };
 
 //START GAME BUTTON
 startGame.addEventListener('click', () => {
     const overlay = document.querySelector('#overlay');
     overlay.style.display = 'none';
+    if (startGame.className === 'lose' || startGame.className ==='win') {
+
+      const reset = overlay.querySelector('a').innerHTML = `<a>Reset Game</a>`
+    }
 });
 
 //listen for the onscreen keyboard to be clicked
 
 qwerty.addEventListener('click', buttonClicked => {
-    const letters =  document.querySelectorAll('[class="letter"]');
+    const letters =  document.querySelectorAll('.letter');
     const buttons = document.querySelectorAll('#qwerty button');
-let button = checkLetter(buttonClicked.target.textContent); //letter user has clicked
-    for (let i = 0; i < buttons.length; i++) {
+    let buttonFunction = checkLetter(buttonClicked.target.textContent.toLowerCase()); //letter user has clicked
+    // document.querySelector('.keyrow').disabled = 'true';
+   for (let i = 0; i < buttons.length; i++) {
         if (buttonClicked.target === buttons[i]) {
-            buttons[i].className = 'chosen';        
-        } if (button === letters) {
-            letters.style.color = 'red';
-            
-        }
-        
-    }    
+            buttons[i].className = 'chosen';
+            buttons[i].disabled = 'true'// keyboard turns dark when button pressed
+            checkWin()
+        } 
+        if (buttonFunction === null && buttonClicked.target === buttons[i]) {
+                    
+                    const hearts = document.querySelectorAll('.tries img');
+                    hearts[missed].src = 'images/lostHeart.png';     
+                    missed ++   
+                    console.log('no match')
+                    checkWin()
+    }}
+     
 });
+
+document.addEventListener('DOMContentLoaded', () => {
+    startGame
+    addPhraseToDisplay(splitPhrase)
+    
+}) 
