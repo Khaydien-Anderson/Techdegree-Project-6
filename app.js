@@ -101,6 +101,7 @@ startGame.addEventListener('click', () => {
 qwerty.addEventListener('click', buttonClicked => {
     const letters =  document.querySelectorAll('.letter');
     const buttons = document.querySelectorAll('#qwerty button');
+    const overlay = document.querySelector('#overlay');
     let buttonFunction = checkLetter(buttonClicked.target.textContent.toLowerCase()); //letter user has clicked
     // document.querySelector('.keyrow').disabled = 'true';
    for (let i = 0; i < buttons.length; i++) {
@@ -115,8 +116,13 @@ qwerty.addEventListener('click', buttonClicked => {
                     hearts[missed].src = 'images/lostHeart.png';     
                     missed ++   
                     console.log('no match')
-                    checkWin()
-    }}
+                    checkWin() 
+                    
+    }
+if (overlay.className === 'win' || overlay.className === 'lose' ) {
+//  useless 
+}
+}
      
 });
 
