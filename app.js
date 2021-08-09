@@ -3,8 +3,38 @@ const phrase = document.getElementById('phrase');
 let missed = 0;
 const startGame = document.querySelector('.btn__reset');
 const ul = document.getElementById('phrase').firstElementChild;
-const phrases = ['operate','super','dictator', 'god', 'crumpet'];
+const phrases = ['JAVA SCRIPT','HT ML','TREE HOUSE', 'REA CT', 'PRO GRAMMING'];
 
+
+//START GAME BUTTON
+startGame.addEventListener('click', () => {
+    const overlay = document.querySelector('#overlay');
+    overlay.style.display = 'none';
+    const splitPhrase = getRandomPhraseAsArray(phrases)
+    addPhraseToDisplay(splitPhrase)
+    if (overlay.className === 'lose' || overlay.className ==='win') {
+
+      const reset = overlay.querySelector('a').innerHTML = `<a>Reset Game</a>`
+        missed = 0;
+        const resetPhrase = document.querySelector('#phrase ul')
+        resetPhrase.innerHTML = ''
+        const buttons = document.querySelectorAll('#qwerty button');
+        const hearts = document.querySelectorAll('.tries img');
+        
+        for (let i = 0; i < buttons.length; i++) {
+            buttons[i].className = '';
+            buttons[i].removeAttribute('disabled');
+    }
+        for (let i = 0; i< 5; i++) {
+            hearts[i].src = 'images/liveHeart.png'; 
+        }
+    
+        
+        const splitPhrase = getRandomPhraseAsArray(phrases)
+        addPhraseToDisplay(splitPhrase)
+        overlay.style.display = 'none'; 
+    }
+});
 
 // RANDOM SPLIT PHRASE GENERATOR 
 const getRandomPhraseAsArray = arr => {
@@ -13,7 +43,7 @@ const getRandomPhraseAsArray = arr => {
      return randomCharacters;
 }
 
-const splitPhrase = getRandomPhraseAsArray(phrases)
+
 
 
 //^^ phrase now split up into variable///
@@ -24,11 +54,20 @@ const splitPhrase = getRandomPhraseAsArray(phrases)
 const addPhraseToDisplay = arr => {
         for (let i = 0; i < arr.length; i++) {
             const li = document.createElement('li');
-
             const letter = arr[i];
-            li.textContent = letter;
-            li.className = 'letter'
+            li.textContent = arr[i]
+            // li.classList.add('letter')
+            
+            
             ul.appendChild(li);
+            
+            if ( arr[i] !== ' ') {
+                li.classList.add("letter");
+                
+            } else {
+                li.classList.add("space");
+            }
+            
         }};
 
 
@@ -51,6 +90,7 @@ for (let i = 0; i < letters.length; i++ ) { // loops through li items
         if (buttonClicked === letters[i].textContent.toLowerCase()) {
                 const li = ul.querySelectorAll('li')[i];
                 li.classList.add("show"); // shows all correct guesses
+                li.style.transition = '0.3s ease-in'
                 match = true;
         
         } 
@@ -76,6 +116,7 @@ const checkWin = () => {
         overlay.style.display = 'flex';
         overlay.className = 'win'
         overlay.firstElementChild.innerHTML =`<h2>you win</h2> `
+        
         startGame.innerHTML = '<a>Reset Game</a>'
     }
      if (missed > 4) {
@@ -86,15 +127,7 @@ const checkWin = () => {
     }
 };
 
-//START GAME BUTTON
-startGame.addEventListener('click', () => {
-    const overlay = document.querySelector('#overlay');
-    overlay.style.display = 'none';
-    if (startGame.className === 'lose' || startGame.className ==='win') {
 
-      const reset = overlay.querySelector('a').innerHTML = `<a>Reset Game</a>`
-    }
-});
 
 //listen for the onscreen keyboard to be clicked
 
@@ -108,6 +141,7 @@ qwerty.addEventListener('click', buttonClicked => {
         if (buttonClicked.target === buttons[i]) {
             buttons[i].className = 'chosen';
             buttons[i].disabled = 'true'// keyboard turns dark when button pressed
+           
             checkWin()
         } 
         if (buttonFunction === null && buttonClicked.target === buttons[i]) {
@@ -119,15 +153,8 @@ qwerty.addEventListener('click', buttonClicked => {
                     checkWin() 
                     
     }
-if (overlay.className === 'win' || overlay.className === 'lose' ) {
-//  useless 
-}
+
 }
      
 });
 
-document.addEventListener('DOMContentLoaded', () => {
-    startGame
-    addPhraseToDisplay(splitPhrase)
-    
-}) 
