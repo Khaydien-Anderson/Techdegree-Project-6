@@ -3,7 +3,7 @@ const phrase = document.getElementById('phrase');
 let missed = 0;
 const startGame = document.querySelector('.btn__reset');
 const ul = document.getElementById('phrase').firstElementChild;
-const phrases = ['JAVA SCRIPT','HT ML','TREE HOUSE', 'REA CT', 'PRO GRAMMING'];
+const phrases = ['JAVASCRIPT','HTML CSS','TREEHOUSE', 'REACT', 'PROGRAMMING'];
 
 // RANDOM SPLIT PHRASE GENERATOR 
 const getRandomPhraseAsArray = arr => {
