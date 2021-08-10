@@ -21,7 +21,7 @@ const addPhraseToDisplay = arr => {
         // li.classList.add('letter')
         
         
-        ul.appendChild(li);
+        
         
         if ( arr[i] !== ' ') {
             li.classList.add("letter");
@@ -29,7 +29,7 @@ const addPhraseToDisplay = arr => {
         } else {
             li.classList.add("space");
         }
-        
+        ul.appendChild(li);
     }};
 
     //check if a letter is in phrase
