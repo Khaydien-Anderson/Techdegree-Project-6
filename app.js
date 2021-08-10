@@ -44,7 +44,7 @@ for (let i = 0; i < letters.length; i++ ) { // loops through li items
     
    
         if (buttonClicked === letters[i].textContent.toLowerCase()) {
-                const li = ul.querySelectorAll('li')[i];
+                const li = letters[i];
                 li.classList.add("show"); // shows all correct guesses
                 li.style.transition = '0.3s ease-in'
                 match = true;
