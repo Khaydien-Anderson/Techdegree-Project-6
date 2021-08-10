@@ -5,6 +5,82 @@ const startGame = document.querySelector('.btn__reset');
 const ul = document.getElementById('phrase').firstElementChild;
 const phrases = ['JAVA SCRIPT','HT ML','TREE HOUSE', 'REA CT', 'PRO GRAMMING'];
 
+// RANDOM SPLIT PHRASE GENERATOR 
+const getRandomPhraseAsArray = arr => {
+    const  randomPhrase = arr[Math.floor(Math.random() * arr.length)];
+    let randomCharacters = randomPhrase.split('');
+    return randomCharacters;
+}
+
+// ADD RANDOM PHRASE TO DISPLAY
+const addPhraseToDisplay = arr => {
+    for (let i = 0; i < arr.length; i++) {
+        const li = document.createElement('li');
+        
+        li.textContent = arr[i]
+        // li.classList.add('letter')
+        
+        
+        ul.appendChild(li);
+        
+        if ( arr[i] !== ' ') {
+            li.classList.add("letter");
+            
+        } else {
+            li.classList.add("space");
+        }
+        
+    }};
+
+    //check if a letter is in phrase
+
+const checkLetter = buttonClicked => {
+    const letters =  document.querySelectorAll('.letter')// newly created classes from line 34
+    let match = null;
+for (let i = 0; i < letters.length; i++ ) { // loops through li items
+    
+    
+    console.log(letters[i].textContent); // logs all correct LETTERS that are hidden
+    
+   
+        if (buttonClicked === letters[i].textContent.toLowerCase()) {
+                const li = ul.querySelectorAll('li')[i];
+                li.classList.add("show"); // shows all correct guesses
+                li.style.transition = '0.3s ease-in'
+                match = true;
+        
+        } 
+    
+
+}
+return match;
+
+};
+
+//check if the game has been won or lost
+const checkWin = () => {
+    let hiddenLI = document.querySelectorAll('.letter')
+    let shownLI = document.querySelectorAll('.show')
+
+    console.log(hiddenLI.length, 'hidden')
+    console.log(shownLI.length, 'shown')
+
+    if (hiddenLI.length === shownLI.length) {
+        const overlay = document.querySelector('#overlay');
+        
+        overlay.style.display = 'flex';
+        overlay.className = 'win'
+        overlay.firstElementChild.innerHTML =`<h2>you win</h2> `
+        
+        startGame.innerHTML = '<a>Reset Game</a>'
+    }
+     if (missed > 4) {
+        overlay.style.display = 'flex';
+        overlay.className = 'lose'
+        overlay.firstElementChild.innerHTML =`<h2>you lose</h2> `
+        startGame.innerHTML = '<a>Reset Game</a>'
+    }
+}; 
 
 //START GAME BUTTON
 startGame.addEventListener('click', () => {
@@ -35,98 +111,6 @@ startGame.addEventListener('click', () => {
         overlay.style.display = 'none'; 
     }
 });
-
-// RANDOM SPLIT PHRASE GENERATOR 
-const getRandomPhraseAsArray = arr => {
-     const  randomPhrase = arr[Math.floor(Math.random() * arr.length)];
-     let randomCharacters = randomPhrase.split('');
-     return randomCharacters;
-}
-
-
-
-
-//^^ phrase now split up into variable///
-
-
-
-// ADD RANDOM PHRASE TO DISPLAY
-const addPhraseToDisplay = arr => {
-        for (let i = 0; i < arr.length; i++) {
-            const li = document.createElement('li');
-            const letter = arr[i];
-            li.textContent = arr[i]
-            // li.classList.add('letter')
-            
-            
-            ul.appendChild(li);
-            
-            if ( arr[i] !== ' ') {
-                li.classList.add("letter");
-                
-            } else {
-                li.classList.add("space");
-            }
-            
-        }};
-
-
-//adds phrase to display //        
-
-//
-
-
-//check if a letter is in phrase
-
-const checkLetter = buttonClicked => {
-    const letters =  document.querySelectorAll('.letter')// newly created classes from line 34
-    let match = null;
-for (let i = 0; i < letters.length; i++ ) { // loops through li items
-    
-    
-    console.log(letters[i].textContent); // logs all correct LETTERS that are hidden
-    
-   
-        if (buttonClicked === letters[i].textContent.toLowerCase()) {
-                const li = ul.querySelectorAll('li')[i];
-                li.classList.add("show"); // shows all correct guesses
-                li.style.transition = '0.3s ease-in'
-                match = true;
-        
-        } 
-    
-
-}
-return match;
-
-};
-
-
-//check if the game has been won or lost
-const checkWin = () => {
-    let hiddenLI = document.querySelectorAll('.letter')
-    let shownLI = document.querySelectorAll('.show')
-
-    console.log(hiddenLI.length, 'hidden')
-    console.log(shownLI.length, 'shown')
-
-    if (hiddenLI.length === shownLI.length) {
-        const overlay = document.querySelector('#overlay');
-        
-        overlay.style.display = 'flex';
-        overlay.className = 'win'
-        overlay.firstElementChild.innerHTML =`<h2>you win</h2> `
-        
-        startGame.innerHTML = '<a>Reset Game</a>'
-    }
-     if (missed > 4) {
-        overlay.style.display = 'flex';
-        overlay.className = 'lose'
-        overlay.firstElementChild.innerHTML =`<h2>you lose</h2> `
-        startGame.innerHTML = '<a>Reset Game</a>'
-    }
-};
-
 
 
 //listen for the onscreen keyboard to be clicked
